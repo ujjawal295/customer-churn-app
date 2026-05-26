@@ -394,7 +394,7 @@ function PredictPage({ showNotification }) {
       dependents:      form.dependents,
     };
 
-    const response = await fetch("http://localhost:8000/predict", {
+    const response = await fetch("http://https://customer-churn-backend-7jm5.onrender.com/predict", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
