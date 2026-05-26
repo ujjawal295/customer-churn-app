@@ -6,7 +6,7 @@ import os
 
 load_dotenv()
 
-# ✅ Correct way — using os.getenv() to read from .env file
+# ✅ Neon PostgreSQL URL with SSL
 DB_URL = (
     f"postgresql+psycopg2://"
     f"{os.getenv('DB_USER')}:"
@@ -14,11 +14,18 @@ DB_URL = (
     f"{os.getenv('DB_HOST')}:"
     f"{os.getenv('DB_PORT')}/"
     f"{os.getenv('DB_NAME')}"
+    f"?sslmode=require"
 )
 
-engine       = create_engine(DB_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-Base         = declarative_base()
+engine = create_engine(DB_URL)
+
+SessionLocal = sessionmaker(
+    autocommit=False,
+    autoflush=False,
+    bind=engine
+)
+
+Base = declarative_base()
 
 def get_db():
     db = SessionLocal()
